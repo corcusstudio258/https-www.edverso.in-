@@ -71,7 +71,7 @@ export default function TermsAndConditions() {
               
               <h3 className="text-xl font-medium text-gray-800 mb-3">4.1 Course Fee</h3>
               <ul className="list-disc list-inside text-gray-700 mb-4 space-y-2">
-                <li>Internship course fee: ₹1000 (inclusive of taxes)</li>
+                <li>Every course has time period and different curriculum so different cost. We just charge cost not fee. So, every course has different fee structure</li>
                 <li>Fee covers course access, mentorship, and certificate</li>
                 <li>Payment is required before course access is granted</li>
                 <li>All payments are processed through secure gateways</li>

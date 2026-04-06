@@ -18,7 +18,7 @@ export default function FAQPage() {
         },
         {
           question: "Is there any fee beyond the ₹1000 course fee?",
-          answer: "No, the ₹1000 course fee is all-inclusive. There are no hidden charges or additional fees. This covers complete course access, study materials, assessments, and your UGC-compliant certificate."
+          answer: "Every course has time period and different curriculum so different cost. We just charge cost not fee. So, every course has different fee structure."
         },
         {
           question: "What payment methods do you accept?",
