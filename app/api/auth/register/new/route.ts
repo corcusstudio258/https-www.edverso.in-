@@ -21,6 +21,7 @@ type Body = {
   graduation: string;
   majorSubject: string;
   semester: string | number;
+  topics: string;
 };
 
 export async function POST(req: NextRequest) {
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
     // Required field presence check
     const required: Array<keyof Body> = [
       "universityName", "collegeName", "universityRollNo", "graduation",
-      "majorSubject", "semester",
+      "majorSubject", "semester", "topics",
     ];
     for (const key of required) {
       if (!body[key] && body[key] !== 0) {
@@ -73,6 +74,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid gender value" }, { status: 400 });
     }
 
+    // Topics validation
+    if (!["Healthcare and wellness", "Community development"].includes(body.topics)) {
+      return NextResponse.json({ error: "Invalid topic selected" }, { status: 400 });
+    }
+
     await dbConnect();
 
     const existsEmail = await Student.findOne({ email: body.email.toLowerCase() });
@@ -104,6 +110,7 @@ export async function POST(req: NextRequest) {
       department: body.majorSubject,
       rollNumber: body.universityRollNo.trim(),
       classSemester: String(body.semester),
+      internshipTopic: body.topics,
       organizationName: "Balaji Seva Sansathan (BSS)",
       organizationRegNo,
       organizationAddress: "Railly, Pandarak, Patna- 803221",

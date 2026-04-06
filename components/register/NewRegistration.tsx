@@ -89,6 +89,7 @@ const MAJOR_SUBJECTS = [
   "Commerce",
 ] as const;
 
+const TOPICS = ["Healthcare and wellness", "Community development"] as const;
 const GRADUATION_TYPES = ["UG", "PG"] as const;
 const SEMESTERS = ["1", "2", "3", "4", "5", "6", "7", "8"] as const;
 const GENDER_OPTIONS = ["Male", "Female", "Other"] as const;
@@ -110,6 +111,7 @@ interface RegisterFormData {
   graduation: string;
   majorSubject: string;
   semester: string;
+  topics: string;
   phoneNumber: string;
   email: string;
   password: string;
@@ -153,6 +155,9 @@ function validate(data: RegisterFormData): FormErrors {
   if (!data.semester)
     e.semester = "Please select a semester.";
 
+  if (!data.topics)
+    e.topics = "Please select a topic.";
+
   if (!data.phoneNumber.trim())
     e.phoneNumber = "Phone number is required.";
   else if (!INDIAN_PHONE_RE.test(data.phoneNumber.trim()))
@@ -188,6 +193,7 @@ export default function RegisterForm() {
     graduation: "",
     majorSubject: "",
     semester: "",
+    topics: "",
     phoneNumber: "",
     email: "",
     password: "",
@@ -239,6 +245,7 @@ export default function RegisterForm() {
         graduation: formData.graduation,
         majorSubject: formData.majorSubject,
         semester: Number(formData.semester),
+        topics: formData.topics,
         phoneNumber: formData.phoneNumber.trim(),
         email: formData.email.trim(),
         password: formData.password,
@@ -401,6 +408,18 @@ export default function RegisterForm() {
                 {SEMESTERS.map((s) => <option key={s} value={s}>Semester {s}</option>)}
               </select>
               {errorMsg("semester")}
+            </div>
+
+            {/* Topics */}
+            <div>
+              <label htmlFor="topics" className="block text-sm font-medium text-gray-700 mb-2">
+                Topics <span className="text-red-500">*</span>
+              </label>
+              <select {...field("topics")} className={inputClass("topics")}>
+                <option value="">Select topic</option>
+                {TOPICS.map((t) => <option key={t} value={t}>{t}</option>)}
+              </select>
+              {errorMsg("topics")}
             </div>
 
             {/* Phone Number */}
