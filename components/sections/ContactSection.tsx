@@ -78,7 +78,7 @@ const ContactSection: FC = () => {
       icon: "🏢",
       title: "Office",
       description: "Visit our headquarters",
-      details: "Ground floor, Hotel The Kanak Near Jaganathan school Park, Barh, Patna- 803213",
+      details: "Registered Address Shakuntala Bhawan, Hospital chowk, In front Anamika rest House, Barh, Patna-803213",
       link: "#"
     }
   ];
