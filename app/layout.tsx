@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Balaji UGC Internship LMS - Digital Internship Platform",
+  title: "KIVT Internship LMS - Digital Internship Platform",
   description: "Empowering students with mandatory internship certification. Register, learn, and get certified seamlessly.",
 };
 

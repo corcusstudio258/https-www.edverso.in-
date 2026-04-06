@@ -2,7 +2,7 @@ import PaymentPageClient from "@/components/pay/PaymentPageClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Complete Payment - Balaji UGC Internship LMS",
+  title: "Complete Payment - KIVT Internship LMS",
   description: "Secure payment gateway for internship registration fee. Complete your registration with ₹1000 payment.",
   keywords: "payment, registration fee, UGC internship, secure payment",
 };

@@ -3,7 +3,7 @@ import LoginForm from "@/components/login/LoginForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login - Balaji UGC Internship LMS",
+  title: "Login - KIVT Internship LMS",
   description: "Access your student dashboard. Login to continue your internship journey, track progress, and download certificates.",
   keywords: "student login, internship portal, UGC login, dashboard access",
 };

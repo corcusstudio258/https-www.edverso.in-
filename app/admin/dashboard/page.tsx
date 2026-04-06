@@ -3,7 +3,7 @@ import AdminDashboard from "@/components/dashboard/AdminDashboard";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard - Balaji UGC Internship LMS",
+  title: "Admin Dashboard - KIVT Internship LMS",
   description: "Admin portal for managing the internship platform.",
 };
 

@@ -77,7 +77,7 @@ const TestimonialsSection: FC = () => {
       college: "Anna University",
       avatar: "👩‍💼",
       rating: 5,
-      content: "Partnering with Balaji UGC LMS has streamlined our internship program completely. The real-time tracking and automated certificate system have significantly reduced our administrative workload.",
+      content: "Partnering with KIVT LMS has streamlined our internship program completely. The real-time tracking and automated certificate system have significantly reduced our administrative workload.",
       category: 'college'
     }
   ];

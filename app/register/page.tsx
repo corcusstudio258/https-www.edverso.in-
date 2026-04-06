@@ -4,7 +4,7 @@ import RegistrationForm from "@/components/register/RegistrationForm";
 import RegisterForm from "@/components/register/NewRegistration";
 
 export const metadata: Metadata = {
-  title: "Register - Balaji UGC Internship LMS",
+  title: "Register - KIVT Internship LMS",
   description: "Join thousands of students and colleges. Register for UGC-mandated internship programs and certification.",
   keywords: "student registration, college registration, UGC internship, sign up",
 };

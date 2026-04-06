@@ -3,7 +3,7 @@ import ForgotPasswordForm from "@/components/forgot-password/ForgotPasswordForm"
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Forgot Password - Balaji UGC Internship LMS",
+  title: "Forgot Password - KIVT Internship LMS",
   description: "Reset your password to access your student dashboard and continue your internship journey.",
   keywords: "forgot password, reset password, student login recovery",
 };

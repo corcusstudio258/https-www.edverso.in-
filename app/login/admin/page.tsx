@@ -3,7 +3,7 @@ import AdminLoginForm from "@/components/login/AdminLoginForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Admin Login - Balaji UGC Internship LMS",
+  title: "Admin Login - KIVT Internship LMS",
   description: "Admin portal for managing students, colleges, and certificates.",
 };
 

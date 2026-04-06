@@ -271,7 +271,7 @@ function PaymentSuccessContent() {
           <div class="footer">
             <p><strong>This is a computer-generated receipt and does not require a physical signature.</strong></p>
             <p>For any queries regarding this payment, please contact support@edverso.in</p>
-            <p>Thank you for registering with Balaji UGC Internship Program!</p>
+            <p>Thank you for registering with KIVT Internship Program!</p>
           </div>
 
           <button class="print-btn" onclick="window.print()">Print Receipt</button>
