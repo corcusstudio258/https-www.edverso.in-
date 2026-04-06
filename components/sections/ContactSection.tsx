@@ -76,9 +76,9 @@ const ContactSection: FC = () => {
     },
     {
       icon: "🏢",
-      title: "Office",
+      title: "Registered Address",
       description: "Visit our headquarters",
-      details: "Registered Address Shakuntala Bhawan, Hospital chowk, In front Anamika rest House, Barh, Patna-803213",
+      details: "Shakuntala Bhawan, Hospital chowk, In back Anamika rest House, Barh, Patna-803213",
       link: "#"
     }
   ];

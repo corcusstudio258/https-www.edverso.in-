@@ -31,11 +31,11 @@ export default function FAQPage() {
       questions: [
         {
           question: "What is the duration of the internship program?",
-          answer: "Our internship programs are designed for 120 hours spread over 30 days, requiring approximately 4 hours of daily commitment for optimal learning."
+          answer: "Semester IV students must  have to undergo 30 hours Health care and wellness or Community development project as per NEP 2020."
         },
         {
-          question: "What subjects are available for internships?",
-          answer: "We offer diverse internship fields including Healthcare, Financial Literacy, Digital Literacy, Skill Development, Community Development, Politics and Government, and Entrepreneurship."
+          question: "What topics are available for internships?",
+          answer: "What are the topics  students have to select Healthcare and wellness, Community development (Financial literacy)."
         },
         {
           question: "Are there any prerequisites for joining?",
