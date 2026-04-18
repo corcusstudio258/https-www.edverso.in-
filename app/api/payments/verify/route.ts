@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { dbConnect } from "@/lib/mongodb";
 import { Student } from "@/models/Student";
+import { internshipDates } from "@/lib/payment-constants";
 
 const RZP_KEY_SECRET = (() => {
   const secret = process.env.RZP_KEY_SECRET;
@@ -37,14 +38,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Student not found" }, { status: 404 });
     }
 
-    // Warn if orderId mismatch (still allow)
     if (!student.payment || student.payment.orderId !== razorpay_order_id) {
-      console.warn("Order id mismatch for student", studentId);
+      return NextResponse.json({ error: "Order ID mismatch" }, { status: 400 });
     }
 
-    // Calculate internship start (now) and end (+30 days)
-    const internshipStart = new Date();
-    const internshipEnd = new Date(internshipStart.getTime() + 10 * 24 * 60 * 60 * 1000);
+    const { start: internshipStart, end: internshipEnd } = internshipDates();
 
     // Update payment and internship info
     const payment = student.payment ?? (student.payment = {});

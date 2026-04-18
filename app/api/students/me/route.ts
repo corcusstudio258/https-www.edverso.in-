@@ -57,19 +57,8 @@ export async function GET(req: Request) {
       });
     };
 
-    /* -------- COMPUTE CORRECT INTERNSHIP END DATE (temporary fix) -------- */
     const internshipStart = student.internshipStart;
-    let internshipEnd = student.internshipEnd; // stored (possibly incorrect)
-
-    // If start exists, compute the correct end (9 days later)
-    if (internshipStart) {
-      const startDate = new Date(internshipStart);
-      if (!isNaN(startDate.getTime())) {
-        const computedEnd = new Date(startDate);
-        computedEnd.setDate(startDate.getDate() + 10);
-        internshipEnd = computedEnd; // use computed end for response
-      }
-    }
+    const internshipEnd = student.internshipEnd;
 
     /* -------- CURRENT TOPIC PROGRESS -------- */
     const currentTopic = student.internshipTopic || null;
@@ -111,6 +100,7 @@ export async function GET(req: Request) {
       durationHours: student.durationHours || 0,
       registrationStatus: student.registrationStatus,
       hasPaid: student.hasPaid,
+      payment: student.payment || null,
       attendance: 100,
 
       /* -------- CURRENT TOPIC PROGRESS -------- */

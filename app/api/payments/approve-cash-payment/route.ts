@@ -52,31 +52,16 @@ export async function POST(req: NextRequest) {
     // In your existing approve-cash-payment API, update the approval section:
 
 if (action === "approve") {
-  // Generate a unique payment ID
   const paymentId = `CASH${Date.now()}${Math.random().toString(36).substr(2, 5).toUpperCase()}`;
-  
-  // Update student payment status
   student.payment.status = "paid";
   student.payment.paymentId = paymentId;
-  student.hasPaid = true;
-  student.registrationStatus = "completed";
-  
-  // Set internship dates
-  const internshipStart = new Date();
-  const internshipEnd = new Date(internshipStart.getTime() + 10 * 24 * 60 * 60 * 1000);
-  student.internshipStart = internshipStart;
-  student.internshipEnd = internshipEnd;
-
   await student.save();
 
   return NextResponse.json({
     success: true,
     message: "Cash payment approved successfully!",
-    paymentId: paymentId, // Send back to admin for reference
-    student: {
-      id: student._id,
-      name: student.fullName
-    }
+    paymentId: paymentId,
+    student: { id: student._id, name: student.fullName }
   });
 }else if (action === "reject") {
       // Remove payment record if rejected

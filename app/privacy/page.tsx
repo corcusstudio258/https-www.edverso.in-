@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. How We Use Your Information</h2>
               <ul className="list-disc list-inside text-gray-700 space-y-2">
                 <li>To provide and maintain UGC-compliant internship services</li>
-                <li>To process your ₹1000 course registration fee</li>
+                <li>To process your ₹600 course registration fee</li>
                 <li>To track academic progress and issue certificates</li>
                 <li>To communicate important updates about your internship</li>
                 <li>To comply with UGC reporting and verification requirements</li>

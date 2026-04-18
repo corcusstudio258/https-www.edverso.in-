@@ -215,7 +215,7 @@ export default function AdminDashboard() {
                   />
                   <ActivityItem
                     title="Payment Received"
-                    description="₹1000 payment from Amit Kumar"
+                    description="₹600 payment from Amit Kumar"
                     time="1 hour ago"
                     type="payment"
                   />

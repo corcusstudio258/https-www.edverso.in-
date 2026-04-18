@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Complete Payment - KIVT Internship LMS",
-  description: "Secure payment gateway for internship registration fee. Complete your registration with ₹1000 payment.",
+  description: "Secure payment gateway for internship registration fee. Complete your registration with ₹600 payment.",
   keywords: "payment, registration fee, UGC internship, secure payment",
 };
 

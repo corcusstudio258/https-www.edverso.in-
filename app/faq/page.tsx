@@ -17,7 +17,7 @@ export default function FAQPage() {
           answer: "No documents are required during registration. We only need basic information like your personal details, educational background, and emergency contact information."
         },
         {
-          question: "Is there any fee beyond the ₹1000 course fee?",
+          question: "Is there any fee beyond the ₹600 course fee?",
           answer: "Every course has time period and different curriculum so different cost. We just charge cost not fee. So, every course has different fee structure."
         },
         {
@@ -261,7 +261,7 @@ export default function FAQPage() {
             <div className="text-gray-600 text-sm">Registration</div>
           </div>
           <div className="bg-white rounded-xl p-4 shadow">
-            <div className="text-2xl font-bold text-green-600">₹1000</div>
+            <div className="text-2xl font-bold text-green-600">₹600</div>
             <div className="text-gray-600 text-sm">All Inclusive</div>
           </div>
           <div className="bg-white rounded-xl p-4 shadow">

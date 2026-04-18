@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import PaymentCheckout from "./PaymentCheckout";
 import toast from "react-hot-toast";
+import { COURSE_AMOUNT_INR } from "@/lib/payment-constants";
 
 interface PaymentPageClientProps {
   studentId: string;
@@ -77,7 +78,7 @@ export default function PaymentPageClient({
                   </p>
                 </div>
                 <div className="text-right">
-                  <div className="text-2xl font-bold text-blue-600">₹600</div>
+                  <div className="text-2xl font-bold text-blue-600">₹{COURSE_AMOUNT_INR}</div>
                   <div className="text-sm text-gray-500">Course Expense</div>
                 </div>
               </div>
@@ -100,7 +101,7 @@ export default function PaymentPageClient({
             {paymentMode === "razorpay" ? (
               <PaymentCheckout
                 studentId={studentId}
-                amount={600}
+                amount={COURSE_AMOUNT_INR}
                 email={email}
                 organizationRegNo={organizationRegNo}
                 fullName={fullName}
@@ -110,7 +111,7 @@ export default function PaymentPageClient({
             ) : (
               <PaymentCheckout
                 studentId={studentId}
-                amount={600}
+                amount={COURSE_AMOUNT_INR}
                 email={email}
                 organizationRegNo={organizationRegNo}
                 fullName={fullName}

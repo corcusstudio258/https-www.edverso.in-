@@ -30,18 +30,19 @@ export default function PaymentCheckout({
   onSuccess,
   onError,
 }: PaymentCheckoutProps) {
+  const razorpayActive = process.env.NEXT_PUBLIC_RAZORPAY_ACTIVE === "true";
+
   const [loading, setLoading] = useState(false);
   const [cashLoading, setCashLoading] = useState(false);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
-  const [selectedMethod, setSelectedMethod] = useState<"online" | "cash">("online");
+  const [selectedMethod, setSelectedMethod] = useState<"online" | "cash">(razorpayActive ? "online" : "cash");
   
-  // New states for cash payment verification
   const [cashPaymentRequested, setCashPaymentRequested] = useState(false);
   const [paymentId, setPaymentId] = useState("");
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
-    // Load Razorpay script
+    if (!razorpayActive) return;
     if (typeof window !== "undefined" && !window.Razorpay) {
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -52,7 +53,7 @@ export default function PaymentCheckout({
     } else {
       setRazorpayLoaded(true);
     }
-  }, [onError]);
+  }, [onError, razorpayActive]);
 
   const createOrder = async () => {
     try {
@@ -65,7 +66,7 @@ export default function PaymentCheckout({
         throw new Error(res.data.error || "Could not create order");
       }
 
-      return res.data.order;
+      return res.data;
     } catch (error: any) {
       console.error("Order creation error:", error);
       throw new Error(
@@ -147,9 +148,38 @@ export default function PaymentCheckout({
     }
   };
 
+  const handleOnlinePayment = async () => {
+    setLoading(true);
+    try {
+      const data = await createOrder();
+      const options = {
+        key: data.key,
+        amount: data.order.amount,
+        currency: data.order.currency,
+        name: "Edverso",
+        description: "Course Registration Fee",
+        order_id: data.order.id,
+        prefill: { email, contact: "" },
+        handler: async (response: any) => {
+          try {
+            await verifyPayment(response);
+            onSuccess(studentId);
+          } catch (err: any) {
+            onError(err.message || "Payment verification failed");
+          }
+        },
+        modal: { ondismiss: () => setLoading(false) },
+      };
+      new window.Razorpay(options).open();
+    } catch (err: any) {
+      onError(err.message || "Payment failed");
+      setLoading(false);
+    }
+  };
+
   const handlePayment = () => {
     if (selectedMethod === "online") {
-      handleCashPaymentRequest();
+      handleOnlinePayment();
     } else {
       handleCashPaymentRequest();
     }
@@ -241,37 +271,39 @@ export default function PaymentCheckout({
         </label>
         
         {/* Online Payment Option */}
-        {/* <div 
-          className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
-            selectedMethod === "online" 
-              ? "border-blue-500 bg-blue-50" 
-              : "border-gray-300 hover:border-gray-400"
-          }`}
-          onClick={() => setSelectedMethod("online")}
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className={`w-5 h-5 rounded-full border-2 ${
-                selectedMethod === "online" 
-                  ? "border-blue-500 bg-blue-500" 
-                  : "border-gray-400"
-              }`}>
-                {selectedMethod === "online" && (
-                  <div className="w-full h-full rounded-full bg-white scale-50"></div>
-                )}
+        {razorpayActive && (
+          <div 
+            className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
+              selectedMethod === "online" 
+                ? "border-blue-500 bg-blue-50" 
+                : "border-gray-300 hover:border-gray-400"
+            }`}
+            onClick={() => setSelectedMethod("online")}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className={`w-5 h-5 rounded-full border-2 ${
+                  selectedMethod === "online" 
+                    ? "border-blue-500 bg-blue-500" 
+                    : "border-gray-400"
+                }`}>
+                  {selectedMethod === "online" && (
+                    <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                  )}
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-900">Online Payment</div>
+                  <div className="text-sm text-gray-600">Pay securely via Razorpay</div>
+                </div>
               </div>
-              <div>
-                <div className="font-semibold text-gray-900">Online Payment</div>
-                <div className="text-sm text-gray-600">Pay securely via Razorpay</div>
+              <div className="flex space-x-2 opacity-75">
+                <PaymentMethod icon="💳" name="Card" />
+                <PaymentMethod icon="📱" name="UPI" />
+                <PaymentMethod icon="🌐" name="Net Banking" />
               </div>
-            </div>
-            <div className="flex space-x-2 opacity-75">
-              <PaymentMethod icon="💳" name="Card" />
-              <PaymentMethod icon="📱" name="UPI" />
-              <PaymentMethod icon="🌐" name="Net Banking" />
             </div>
           </div>
-        </div> */}
+        )}
 
         {/* Cash Payment Option */}
         <div 
@@ -324,7 +356,7 @@ export default function PaymentCheckout({
       {/* Payment Button */}
       <button
         onClick={handlePayment}
-        disabled={loading || cashLoading || !razorpayLoaded}
+        disabled={loading || cashLoading || (selectedMethod === "online" && !razorpayLoaded)}
         className={`w-full py-4 text-lg font-semibold relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed rounded-lg ${
           selectedMethod === "online" 
             ? "bg-blue-600 hover:bg-blue-700 text-white" 

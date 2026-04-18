@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { dbConnect } from "@/lib/mongodb";
 import { Student } from "@/models/Student";
+import { COURSE_AMOUNT_PAISE } from "@/lib/payment-constants";
 
 const RZP_KEY_ID = process.env.RZP_KEY_ID;
 const RZP_KEY_SECRET = process.env.RZP_KEY_SECRET;
@@ -26,7 +27,7 @@ export async function POST(req: Request) {
     // if already paid
     if (student.hasPaid) return NextResponse.json({ error: "Already paid" }, { status: 400 });
 
-    const amountInPaise = 1000 * 100; // ₹1000
+    const amountInPaise = COURSE_AMOUNT_PAISE;
 
     // create Razorpay order
     const order = await razorpay.orders.create({
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       ok: true,
+      key: RZP_KEY_ID,
       order: {
         id: order.id,
         amount: orderAmount,

@@ -3,6 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbConnect } from "@/lib/mongodb";
 import { Student } from "@/models/Student";
+import { internshipDates } from "@/lib/payment-constants";
 
 export async function POST(req: NextRequest) {
   try {
@@ -41,13 +42,10 @@ export async function POST(req: NextRequest) {
 
     // Check if student is already marked as paid
     if (!student.hasPaid) {
-      // Update student status
       student.hasPaid = true;
       student.registrationStatus = "completed";
       
-      // Set internship dates
-      const internshipStart = new Date();
-      const internshipEnd = new Date(internshipStart.getTime() + 10 * 24 * 60 * 60 * 1000);
+      const { start: internshipStart, end: internshipEnd } = internshipDates();
       student.internshipStart = internshipStart;
       student.internshipEnd = internshipEnd;
       

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle, BookOpen, Award, Clock, Mail, Download, Receipt } from "lucide-react";
 import { api } from "@/lib/api";
+import { COURSE_AMOUNT_INR } from "@/lib/payment-constants";
 
 // Wrap in Suspense at the page level
 export default function PaymentSuccessPage() {
@@ -36,6 +37,9 @@ function PaymentSuccessContent() {
           const res = await api.get("/students/me");
   
           setStudent(res.data.student);
+          if (!res.data.student?.hasPaid) {
+            router.push("/pay");
+          }
         } catch (error) {
           console.error("Dashboard error:", error);
         }
@@ -48,20 +52,19 @@ function PaymentSuccessContent() {
     // Set document title
     document.title = "Payment Successful - Edverso";
 
-    // Generate payment data (in real app, this would come from API)
-    const generatedPaymentData: any = {
-      transactionId: `TXN${Date.now().toString().slice(-8)}`,
-      amount: 1000,
+    const generatedPaymentData: any = student ? {
+      transactionId: student.payment?.paymentId || "N/A",
+      amount: student.payment?.amount ? student.payment.amount / 100 : COURSE_AMOUNT_INR,
       date: new Date().toLocaleDateString('en-IN', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric'
       }),
-      studentName: fullName || "Student",
-    };
+      studentName: student.fullName || fullName || "Student",
+    } : null;
 
     setPaymentData(generatedPaymentData);
-  }, [studentId, fullName]);
+  }, [studentId, fullName, student]);
 
   const handlePrintReceipt = () => {
     if (!paymentData) return;

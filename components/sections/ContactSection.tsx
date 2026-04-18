@@ -90,7 +90,7 @@ const ContactSection: FC = () => {
     },
     {
       question: "What is the registration fee?",
-      answer: "The registration fee is ₹1000 per student, which includes access to all study materials and certificate issuance."
+      answer: "The registration fee is ₹600 per student, which includes access to all study materials and certificate issuance."
     },
     {
       question: "How do colleges partner with you?",

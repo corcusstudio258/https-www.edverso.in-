@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { dbConnect } from "@/lib/mongodb";
 import { Student } from "@/models/Student";
+import { internshipDates } from "@/lib/payment-constants";
 
 const RZP_WEBHOOK_SECRET = process.env.RZP_WEBHOOK_SECRET;
 if (!RZP_WEBHOOK_SECRET) console.warn("RZP_WEBHOOK_SECRET not set; webhook signature won't be checked");
@@ -32,9 +33,7 @@ export async function POST(req: Request) {
       const student = await Student.findOne({ "payment.orderId": orderId });
 
       if (student) {
-        // Calculate internship start (now) and end (+30 days)
-        const internshipStart = new Date();
-        const internshipEnd = new Date(internshipStart.getTime() + 30 * 24 * 60 * 60 * 1000);
+        const { start: internshipStart, end: internshipEnd } = internshipDates();
 
         student.payment = {
           ...(student.payment ?? {}),

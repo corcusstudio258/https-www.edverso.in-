@@ -142,7 +142,7 @@ export default function LoginForm() {
                       onClick={handlePaymentRedirect}
                       className="mt-3 px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-all duration-200 hover:scale-105 shadow-sm"
                     >
-                      Complete Payment - ₹1000
+                      Complete Payment - ₹600
                     </button>
                   )}
 
@@ -334,7 +334,7 @@ export default function LoginForm() {
           </div>
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-            <span><strong>Payment Pending:</strong> Complete ₹1000 payment to continue</span>
+            <span><strong>Payment Pending:</strong> Complete ₹600 payment to continue</span>
           </div>
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
